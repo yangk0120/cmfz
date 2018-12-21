@@ -6,4 +6,6 @@ import javax.servlet.http.HttpSession;
 
 public interface AdminService {
     public boolean login(Admin admin, HttpSession session);
+
+    public void quit(HttpSession session);
 }

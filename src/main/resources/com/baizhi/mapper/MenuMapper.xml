@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.MenuMapper">
+    <resultMap id="rm1" type="com.baizhi.entity.Menu">
+        <id column="m1id" property="id"/>
+        <result column="m1title" property="title"/>
+        <result column="m1iconCls" property="iconCls"/>
+        <result column="m1url" property="url"/>
+        <collection property="list" ofType="com.baizhi.entity.Menu">
+            <id column="m2id" property="id"/>
+            <result column="m2title" property="title"/>
+            <result column="m2iconCls" property="iconCls"/>
+            <result column="m2url" property="url"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAll" resultMap="rm1">
+        SELECT m1.id m1id,m1.title m1title,m1.iconCls m1iconCls,m1.url m1url,m1.partent_id m1parent_id,
+        m2.id m2id,m2.title m2title,m2.iconCls m2iconCls,m2.url m2url,m2.partent_id m2parent_id
+        from menu m1 JOIN menu m2
+        on m2.partent_id = m1.id
+    </select>
+</mapper>
